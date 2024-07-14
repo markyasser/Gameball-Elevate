@@ -22,7 +22,9 @@ namespace Gameball_Elevate.Services
             {
                 try
                 {
+                    Console.WriteLine($"Sending email to user {user.UserName} --- {user.Email}...");
                     await _emailService.SendEmailAsync(user.Email, "Daily Reminder, Low Points Alert", $"Hello {user.UserName}, you have less than 100 points.\n Hurry to buy new products");
+                    Console.WriteLine($"Email Sent");
                 }
                 catch (Exception ex)
                 {

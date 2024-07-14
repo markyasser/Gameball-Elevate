@@ -101,4 +101,12 @@ RecurringJob.AddOrUpdate<DailyEmailService>(
     service => service.SendDailyEmails(),
     Cron.Daily(17, 0)); // 5:00 PM daily
 
+
+// For testing only
+// Schedule the job to run every 5 seconds
+//RecurringJob.AddOrUpdate<DailyEmailService>(
+//    service => service.SendDailyEmails(),
+//    "*/5 * * * * *"); // Every 5 seconds
+
+
 app.Run();
