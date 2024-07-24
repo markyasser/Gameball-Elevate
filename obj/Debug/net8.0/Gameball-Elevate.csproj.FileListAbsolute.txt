@@ -61,3 +61,4 @@ D:\Work\Gameball\Gameball-Elevate\obj\Debug\net8.0\refint\Gameball-Elevate.dll
 D:\Work\Gameball\Gameball-Elevate\obj\Debug\net8.0\Gameball-Elevate.pdb
 D:\Work\Gameball\Gameball-Elevate\obj\Debug\net8.0\Gameball-Elevate.genruntimeconfig.cache
 D:\Work\Gameball\Gameball-Elevate\obj\Debug\net8.0\ref\Gameball-Elevate.dll
+D:\Work\Gameball\Gameball-Elevate\bin\Debug\net8.0\ZiggyCreatures.FusionCache.dll

@@ -1,10 +1,10 @@
 ﻿using Gameball_Elevate.Models;
 using Gameball_Elevate.Ops;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 using System.Security.Claims;
-using System.Threading.Tasks;
+using ZiggyCreatures.Caching.Fusion;
 
 namespace Gameball_Elevate.Controllers
 {
@@ -14,10 +14,14 @@ namespace Gameball_Elevate.Controllers
     {
         private readonly UserOps _userRepository;
         private readonly TransactionOps _transactionRepository;
-        public UsersController(UserOps userRepository, TransactionOps transactionRepository)
+        private readonly IFusionCache _cache; // Caching Using FusionCache
+        private readonly ILogger<UsersController> _logger;
+        public UsersController(UserOps userRepository, TransactionOps transactionRepository, IFusionCache cache, ILogger<UsersController> logger)
         {
             _userRepository = userRepository;
             _transactionRepository = transactionRepository;
+            _cache = cache;
+            _logger = logger;
         }
 
 
@@ -27,8 +31,29 @@ namespace Gameball_Elevate.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetUsers()
         {
-            var users = await _userRepository.GetAllAsync();
+            var stopwatch = Stopwatch.StartNew(); // Start measuring time
+
+            // Define a cache key
+            var cacheKey = "all_users";
+
+            // Use FusionCache to get or set the cached data
+            var users = _cache.GetOrSet<IEnumerable<User>>(cacheKey, 
+                _ => _userRepository.GetAll(),
+                TimeSpan.FromMinutes(5) // 5 minutes
+            );
+
+            stopwatch.Stop(); // Stop measuring time
+            var elapsedMilliseconds = stopwatch.ElapsedMilliseconds;
+
+            // Log the response time
+            _logger.LogInformation("GetUsers response time: {ElapsedMilliseconds} ms", elapsedMilliseconds);
+
             return Ok(users);
+        }
+        // Local function to fetch users
+        private async Task<IEnumerable<User>> FetchUsersAsync()
+        {
+            return await _userRepository.GetAllAsync();
         }
 
         // Check the balance of any user

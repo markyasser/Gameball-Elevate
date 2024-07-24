@@ -91,6 +91,9 @@ builder.Services.AddSwaggerGen(options =>
 );
 builder.Services.AddEndpointsApiExplorer();
 
+// Add logging to the service collection
+builder.Logging.AddConsole();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -117,6 +120,6 @@ RecurringJob.AddOrUpdate<DailyEmailService>(
 //RecurringJob.AddOrUpdate<DailyEmailService>(
 //    service => service.SendDailyEmails(),
 //    "*/5 * * * * *"); // Every 5 seconds
-
+// Add logging to the service collection
 
 app.Run();
