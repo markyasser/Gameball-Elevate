@@ -12,6 +12,8 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using System.Text;
+using ZiggyCreatures.Caching.Fusion;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -65,6 +67,14 @@ builder.Services.AddHangfireServer();
 
 builder.Services.AddControllers();
 
+// Add FusionCache
+builder.Services.AddFusionCache(options =>
+{
+    options.DefaultEntryOptions = new FusionCacheEntryOptions
+    {
+        Duration = TimeSpan.FromMinutes(5)
+    };
+});
 
 // Swagger
 builder.Services.AddSwaggerGen(options =>
