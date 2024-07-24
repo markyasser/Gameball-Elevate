@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOTNET_ROOT = tool name: 'dotnet', type: 'DotNetCoreSdkInstaller'
+        DOTNET_ROOT = tool name: 'dotnet', type: 'CustomTool'
     }
 
     stages {
@@ -14,8 +14,7 @@ pipeline {
         stage('Restore') {
             steps {
                 script {
-                    def dotnetHome = tool name: 'dotnet', type: 'DotNetCoreSdkInstaller'
-                    env.PATH = "${dotnetHome}/bin:${env.PATH}"
+                    env.PATH = "${env.DOTNET_ROOT}:${env.PATH}"
                 }
                 sh 'dotnet restore'
             }
