@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Gameball-Elevate")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c84e2d9b5e83246785b56a75a228ebc40fc07d0c")]
 [assembly: System.Reflection.AssemblyProductAttribute("Gameball-Elevate")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Gameball-Elevate")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
