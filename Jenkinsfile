@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOTNET_ROOT = tool name: 'dotnet', type: 'CustomTool'
+        DOTNET_ROOT = tool name: 'dotnet-sdk-7.0', type: 'DotNetCoreSdkInstaller'
     }
 
     stages {
@@ -14,7 +14,7 @@ pipeline {
         stage('Restore') {
             steps {
                 script {
-                    env.PATH = "${env.DOTNET_ROOT}:${env.PATH}"
+                    env.PATH = "${env.DOTNET_ROOT}/bin:${env.PATH}"
                 }
                 sh 'dotnet restore'
             }
@@ -22,6 +22,11 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'dotnet build --configuration Release'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'dotnet test --no-build --verbosity normal'
             }
         }
     }
