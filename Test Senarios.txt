@@ -1,0 +1,26 @@
+Auth:
+- Register (Admin)
+- Login (Admin)
+- Create Customer (Admin)
+- Login (Customer)
+
+Admin:
+- Get all Users
+- Add points to a user by user Id
+- Check all transactions
+- Check user's transaction by user Id
+- Check user points balance by user Id
+
+Customer:
+- Try any Admin feature -> Unauthorized 
+- Check my points
+- Buy products (+20% points of the product price)
+- Redeem points 
+
+Emails:
+- Check Sending emails success on send grid (Using Hang Fire)
+
+Additional Features:
+- Repository pattern (Ops directory)
+- Using JWT token
+- Transactions
